@@ -1,0 +1,37 @@
+{
+    "name": "setup-express-api",
+    "version": "1.0.0",
+    "description": "Create an Express API with auth features with better-auth.",
+    "type": "module",
+    "bin": {
+        "setup-express-api": "./bin/cli.js"
+    },
+    "files": [
+        "bin",
+        "src"
+    ],
+    "scripts": {
+        "test": "node --test test/*.test.js"
+    },
+    "dependencies": {
+        "@thantpyaeshine/express-api": "1.0.0"
+    },
+    "keywords": [
+        "setup-express-api",
+        "create-express-api",
+        "express",
+        "cli",
+        "api",
+        "typescript",
+        "better-auth"
+    ],
+    "license": "MIT",
+    "engines": {
+        "node": ">=22"
+    },
+    "allowScripts": {
+        "esbuild": true,
+        "@parcel/watcher": true,
+        "unrs-resolver": true
+    }
+}
