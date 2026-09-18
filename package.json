@@ -1,6 +1,6 @@
 {
     "name": "setup-express-api",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Create an Express API with auth features with better-auth.",
     "type": "module",
     "bin": {
