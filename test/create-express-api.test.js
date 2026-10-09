@@ -8,7 +8,14 @@ import { scaffold } from "../src/scaffold.js";
 function createFixture(version = "9.9.9") {
     const fixtureDirectory = fs.mkdtempSync(path.join(os.tmpdir(), "express-template-"));
     const packageJsonPath = path.join(fixtureDirectory, "package.json");
-    fs.writeFileSync(packageJsonPath, JSON.stringify({ name: "@thantpyaeshine/express-api", version }));
+    fs.writeFileSync(
+        packageJsonPath,
+        JSON.stringify({
+            name: "@thantpyaeshine/express-api",
+            version,
+            publishConfig: { access: "public" }
+        })
+    );
     fs.writeFileSync(path.join(fixtureDirectory, "app.js"), "export default 'template';\n");
     return { fixtureDirectory, packageJsonPath };
 }
@@ -65,6 +72,23 @@ test("applies project config version to generated package metadata", async (test
 
     const generatedPackage = JSON.parse(fs.readFileSync(path.join(targetDirectory, "package.json"), "utf8"));
     assert.equal(generatedPackage.version, "0.1.0");
+});
+
+test("removes publishConfig from generated package metadata", async (testContext) => {
+    const fixture = createFixture();
+    const targetDirectory = fs.mkdtempSync(path.join(os.tmpdir(), "express-api-"));
+    testContext.after(() => {
+        fs.rmSync(fixture.fixtureDirectory, { recursive: true, force: true });
+        fs.rmSync(targetDirectory, { recursive: true, force: true });
+    });
+
+    await scaffold(targetDirectory, {
+        resolvePackage: () => fixture.packageJsonPath,
+        installDependencies: false
+    });
+
+    const generatedPackage = JSON.parse(fs.readFileSync(path.join(targetDirectory, "package.json"), "utf8"));
+    assert.equal(generatedPackage.publishConfig, undefined);
 });
 
 test("explains how to recover from a missing template dependency", async (testContext) => {

@@ -102,14 +102,11 @@ export async function scaffold(targetDir, options = {}) {
 
     try {
         fs.cpSync(templateDirectory, targetDir, { recursive: true });
-        if (options.projectConfig) {
-            const generatedPackagePath = path.join(targetDir, "package.json");
-            const generatedPackage = readPackageJson(generatedPackagePath, "generated project");
-            fs.writeFileSync(
-                generatedPackagePath,
-                `${JSON.stringify({ ...generatedPackage, ...options.projectConfig }, null, 2)}\n`
-            );
-        }
+        const generatedPackagePath = path.join(targetDir, "package.json");
+        const generatedPackage = readPackageJson(generatedPackagePath, "generated project");
+        const mergedPackage = options.projectConfig ? { ...generatedPackage, ...options.projectConfig } : generatedPackage;
+        delete mergedPackage.publishConfig;
+        fs.writeFileSync(generatedPackagePath, `${JSON.stringify(mergedPackage, null, 2)}\n`);
     } catch {
         throw new Error(`Unable to copy template files into: ${targetDir}`);
     }

@@ -11,7 +11,8 @@
         "src"
     ],
     "scripts": {
-        "test": "node --test test/*.test.js"
+        "test": "node --test test/*.test.js",
+        "scaffold": "node scripts/scaffold-test.js"
     },
     "dependencies": {
         "@thantpyaeshine/express-api": "1.2.0"

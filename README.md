@@ -3,6 +3,16 @@
 Scaffold an Express API into the current empty directory.
 Generated project `package.json` defaults to version `0.1.0` (minimum supported scaffolded version).
 
+## Test scaffold script
+
+Generate a local test scaffold under `.express-api/`:
+
+```sh
+npm run scaffold
+```
+
+This script recreates `.express-api/` on each run (deletes it first if it already exists).
+
 ## Usage
 
 ```sh
