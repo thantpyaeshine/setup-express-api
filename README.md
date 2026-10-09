@@ -1,6 +1,7 @@
 # setup-express-api
 
 Scaffold an Express API into the current empty directory.
+Generated project `package.json` defaults to version `0.1.0` (minimum supported scaffolded version).
 
 ## Usage
 

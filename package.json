@@ -1,7 +1,7 @@
 {
     "name": "setup-express-api",
-    "version": "1.0.2",
-    "description": "Create an Express API with auth features with better-auth.",
+    "version": "1.2.0",
+    "description": "Create an Express API with basic features set up.",
     "type": "module",
     "bin": {
         "setup-express-api": "./bin/cli.js"
@@ -14,7 +14,7 @@
         "test": "node --test test/*.test.js"
     },
     "dependencies": {
-        "@thantpyaeshine/express-api": "1.0.2"
+        "@thantpyaeshine/express-api": "1.2.0"
     },
     "keywords": [
         "setup-express-api",

@@ -5,7 +5,7 @@ import path from "node:path";
 import test from "node:test";
 import { scaffold } from "../src/scaffold.js";
 
-function createFixture(version = "1.0.1") {
+function createFixture(version = "9.9.9") {
     const fixtureDirectory = fs.mkdtempSync(path.join(os.tmpdir(), "express-template-"));
     const packageJsonPath = path.join(fixtureDirectory, "package.json");
     fs.writeFileSync(packageJsonPath, JSON.stringify({ name: "@thantpyaeshine/express-api", version }));
@@ -26,7 +26,7 @@ test("copies the matching npm template into an empty directory", async (testCont
         installDependencies: false
     });
 
-    assert.equal(result.templateVersion, "1.0.1");
+    assert.equal(result.templateVersion, "9.9.9");
     assert.equal(fs.readFileSync(path.join(targetDirectory, "app.js"), "utf8"), "export default 'template';\n");
 });
 
@@ -47,6 +47,24 @@ test("installs generated project dependencies by default", async (testContext) =
     });
 
     assert.equal(installedDirectory, targetDirectory);
+});
+
+test("applies project config version to generated package metadata", async (testContext) => {
+    const fixture = createFixture();
+    const targetDirectory = fs.mkdtempSync(path.join(os.tmpdir(), "express-api-"));
+    testContext.after(() => {
+        fs.rmSync(fixture.fixtureDirectory, { recursive: true, force: true });
+        fs.rmSync(targetDirectory, { recursive: true, force: true });
+    });
+
+    await scaffold(targetDirectory, {
+        resolvePackage: () => fixture.packageJsonPath,
+        projectConfig: { version: "0.1.0" },
+        installDependencies: false
+    });
+
+    const generatedPackage = JSON.parse(fs.readFileSync(path.join(targetDirectory, "package.json"), "utf8"));
+    assert.equal(generatedPackage.version, "0.1.0");
 });
 
 test("explains how to recover from a missing template dependency", async (testContext) => {

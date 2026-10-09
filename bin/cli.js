@@ -28,6 +28,7 @@ try {
     const projectConfig = skipPrompts
         ? {
             name: path.basename(targetDir).toLowerCase().replace(/[^a-z0-9-]/g, "-").replace(/-+/g, "-").replace(/^-|-$/g, "") || "express-api-server",
+            version: "0.1.0",
             description: "",
             author: "",
             license: "MIT"
