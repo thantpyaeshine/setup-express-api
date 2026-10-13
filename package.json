@@ -1,6 +1,6 @@
 {
     "name": "setup-express-api",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "description": "Create an Express API with basic features set up.",
     "type": "module",
     "bin": {
@@ -15,7 +15,7 @@
         "scaffold": "node scripts/scaffold-test.js"
     },
     "dependencies": {
-        "@thantpyaeshine/express-api": "1.2.0"
+        "@thantpyaeshine/express-api": "1.2.1"
     },
     "keywords": [
         "setup-express-api",
